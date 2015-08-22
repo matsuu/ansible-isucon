@@ -55,6 +55,9 @@
         creates: /usr/my.cnf
       notify: restart mysqld
     - file: path=/etc/my.cnf state=absent
+
+    # xbuild
+    - yum: name=gcc
     - sudo_user: isucon
       git: repo=https://github.com/tagomoris/xbuild.git dest=/home/isucon/.xbuild
 

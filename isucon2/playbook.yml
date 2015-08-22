@@ -39,6 +39,9 @@
       args:
         creates: /var/lib/mysql/isucon2
       notify: restart mysqld
+
+    # xbuild
+    - yum: name=gcc
     - sudo_user: isucon
       git: repo=https://github.com/tagomoris/xbuild.git dest=/home/isucon/.xbuild
 
