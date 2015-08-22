@@ -15,7 +15,7 @@ Remote:
 git clone https://github.com/matsuu/ansible-isucon.git
 cd ansible-isucon/isucon4-qualifier
 echo 192.0.2.1 > hosts
-ansible-playbook -i hosts *.yml
+ansible-playbook -i hosts playbook.yml
 ```
 
 Local:
@@ -24,7 +24,7 @@ yum install -y epel-release git
 yum install -y ansible
 git clone https://github.com/matsuu/ansible-isucon.git
 cd ansible-isucon/isucon4-qualifier
-ansible-playbook -i local *.yml
+ansible-playbook -i local playbook.yml
 ```
 
 ## 本来の設定と異なるところ
