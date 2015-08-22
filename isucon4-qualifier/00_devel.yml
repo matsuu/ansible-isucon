@@ -2,7 +2,6 @@
 - hosts: all
   sudo: yes
   tasks:
-    - yum: pkg=libselinux-python state=installed
     - yum: pkg=epel-release state=installed
     - yum: pkg=libselinux-python state=installed
     - yum: pkg=python-meld3 state=installed
