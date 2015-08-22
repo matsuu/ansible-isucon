@@ -1,19 +1,31 @@
-# これはなに
+# ansible-isucon/isucon2
 
-isucon2とほぼ同じ環境を構築するためのVagrantfileです。
+## Overview
 
-## 起動方法
+Ansible playbook for [ISUCON2](http://isucon.net/archives/41251926.html)
 
-- vagrant実行環境を用意する
-- このリポジトリ内のVagrantfileを手元に用意する
--- 必要に応じてVagrantfileを編集する
-- Vagrantfileがあるディレクトリで`vagrant up`を実行する
-- Ansibleによるプロビジョニングが完了したら`vagrant ssh`を実行する
+## Rquirement
 
-## 動作確認
+- CentOS 6.x
 
-Mac OS X + VirtualBox 5.0 + Vagrant 1.7.4で動作確認済です。
-VMWare Desktopでも動作するかもしれませんが未確認です。
+## Usage
+
+Remote:
+```
+git clone https://github.com/matsuu/ansible-isucon.git
+cd ansible-isucon/isucon2
+echo 192.0.2.1 > hosts
+ansible-playbook -i hosts playbook.yml
+```
+
+Local:
+```
+yum install -y epel-release git
+yum install -y ansible
+git clone https://github.com/matsuu/ansible-isucon.git
+cd ansible-isucon/isucon2
+ansible-playbook -i local playbook.yml
+```
 
 ## 本来の設定と異なるところ
 
@@ -21,62 +33,8 @@ VMWare Desktopでも動作するかもしれませんが未確認です。
 - MySQLのバージョンを5.5からMySQL GA最新版(現在は5.6系)に変更しています
 - Javaがうまくコンパイルできないので諦めました
 
-## FAQ
-
-### virtualboxで以下のようなエラーメッセージが表示される
-
-> The provider 'virtualbox' that was requested to back the machine
-> 'default' is reporting that it isn't usable on this system. The
-> reason is shown below:
-> 
-> Vagrant has detected that you have a version of VirtualBox installed
-> that is not supported. Please install one of the supported versions
-> listed below to use Vagrant:
-> 
-> 4.0, 4.1, 4.2, 4.3
-
-Vagrantのバージョンが古い可能性があります。最新のVagrantを使用してください。
-
-
-### vagrant upを実行するとvboxsfのエラーが表示される
-
-> Failed to mount folders in Linux guest. This is usually because
-> the "vboxsf" file system is not available. Please verify that
-> the guest additions are properly installed in the guest and
-> can work properly. The command attempted was:
-> 
-> mount -t vboxsf -o uid=`id -u vagrant`,gid=`getent group vagrant | cut -d: -f3` vagrant /vagrant
-> mount -t vboxsf -o uid=`id -u vagrant`,gid=`id -g vagrant` vagrant /vagrant
-> 
-> The error output from the last command was:
-> 
-> /sbin/mount.vboxsf: mounting failed with the error: No such device
-
-[これと同じ現象](http://qiita.com/hapicky/items/a7f9d56588f96d005fad)と思われます。気にせず`vagrant provision`を実行してください。
-
-### プログラムの動かし方がわからない
-
-以下をご確認ください。
+## References
 
 - [自家製 #isucon2 のつくりかた](http://blog.livedoor.jp/techblog/archives/67728751.html)
-
-### ブラウザで動作確認ができない
-
-Vagrantfileのネットワーク設定がデフォルトのままなので適当に変更してください。
-よくわからない場合は`# config.vm.network "private_network", ip: "192.168.33.10"`のコメントを外してブラウザから192.168.33.10にアクセスしてみてください。
-
-### Vagrantがない環境で試したい
-
-CentOS6環境を用意できれば以下の手順で構築可能です。
-
-```
-yum install -y epel-release git
-yum install -y ansible
-git clone https://github.com/matsuu/vagrant-isucon.git
-cd vagrant-isucon/isucon2/ansible
-ansible-playbook playbook.yml -i local
-```
-
-## その他
-
-- 一部ファイルは[tagomoris/isucon2](https://github.com/tagomoris/isucon2)から拝借しています
+- [tagomoris/isucon2](https://github.com/tagomoris/isucon2)
+- [vagrant-isucon](https://github.com/matsuu/vagrant-isucon)
