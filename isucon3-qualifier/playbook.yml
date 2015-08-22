@@ -6,6 +6,9 @@
     - yum: name=epel-release
     - yum: name=git
 
+    # SELinux
+    - selinux: state=disabled
+
     # memcached
     - yum: name=memcached
     - copy: src=files/etc/sysconfig/memcached dest=/etc/sysconfig/

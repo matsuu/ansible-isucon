@@ -6,6 +6,9 @@
     - yum: name=epel-release
     - yum: name=git
 
+    # SELinux
+    - selinux: state=disabled
+
     # httpd
     - yum: name=httpd
     - yum: name=php
