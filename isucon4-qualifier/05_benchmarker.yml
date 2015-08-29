@@ -12,6 +12,7 @@
     - name: build benchmarker
       command: /home/isucon/env.sh make release
       sudo_user: isucon
+      ignore_errors: yes
       args:
         chdir: /tmp/benchmarker
     - command: mv /tmp/benchmarker/benchmarker /home/isucon/
