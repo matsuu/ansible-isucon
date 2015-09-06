@@ -27,5 +27,3 @@
 
     - file: path=/home/isucon/php/nginx.local.conf state=absent
     - file: path=/home/isucon/php/Procfile state=absent
-
-    - selinux: state=disabled
