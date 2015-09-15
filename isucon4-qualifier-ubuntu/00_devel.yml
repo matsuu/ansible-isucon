@@ -1,0 +1,26 @@
+---
+- hosts: all
+  sudo: yes
+  tasks:
+    - apt: name=build-essentials
+    - apt: name=python-meld3
+    - apt: name=rubygems
+    - apt: name=git
+    - apt: name=openssl-dev
+    - apt: name=libcurl
+    - apt: name=libcurl-dev
+    - apt: name=bison
+    - apt: name=bison-dev
+    - apt: name=libjpeg-turbo
+    - apt: name=libjpeg-turbo-dev
+    - apt: name=libpng
+    - apt: name=libpng-dev
+    - apt: name=libmcrypt
+    - apt: name=libmcrypt-dev
+    - apt: name=readline
+    - apt: name=readline-dev
+    - apt: name=libtidy
+    - apt: name=libtidy-dev
+    - apt: name=libxml2-dev
+    - apt: name=libxslt-dev
+    - apt: name=mysql-server
