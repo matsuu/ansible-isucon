@@ -2,7 +2,7 @@
 - hosts: all
   sudo: yes
   tasks:
-    - apt: name=build-essentials
+    - apt: name=build-essential
     - apt: name=python-meld3
     - apt: name=rubygems
     - apt: name=git
