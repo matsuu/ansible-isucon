@@ -1,0 +1,32 @@
+---
+- hosts: all
+  sudo: yes
+  tasks:
+    - apt: name={{item}}
+      with_items:
+        - autoconf
+        - automake
+        - curl
+        - build-essential
+        - python-meld3
+        - ruby
+        - git
+        - libssl-dev
+        - libcurl3
+        - libcurl4-openssl-dev
+        - bison
+        - libbison-dev
+        - libjpeg-turbo8
+        - libjpeg-turbo8-dev
+        - libpng12-0
+        - libpng12-dev
+        - libmcrypt4
+        - libmcrypt-dev
+        - readline-common
+        - libreadline-dev
+        - libtidy-0.99-0
+        - libtidy-dev
+        - libxml2-dev
+        - libxslt1-dev
+        - mysql-server
+        - libmysqlclient-dev

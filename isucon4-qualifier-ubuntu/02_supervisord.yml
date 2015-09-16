@@ -1,0 +1,16 @@
+---
+- hosts: all
+  sudo: yes
+  tasks:
+    - apt: name=python-setuptools
+    - apt: name=supervisor
+    - service: name=supervisor enabled=true
+    - shell: cp /tmp/isucon4/qualifier/ami/files/supervisord.conf /etc/supervisor/supervisord.conf
+      notify:
+        - restart supervisord
+    - ini_file: dest=/etc/supervisor/supervisord.conf section=unix_http_server option=chown value=root:sudo
+      notify:
+        - restart supervisord
+  handlers:
+    - name: restart supervisord
+      action: service name=supervisor state=restarted
