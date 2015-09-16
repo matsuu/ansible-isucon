@@ -3,14 +3,14 @@
   sudo: yes
   tasks:
     - apt: name=python-setuptools
-    - easy_install: name=supervisor
-    - shell: |
-        cp /tmp/isucon4/qualifier/ami/files/supervisord.init /etc/init.d/supervisord
-        chmod a+x /etc/init.d/supervisord
-    - service: name=supervisord enabled=true
-    - shell: cp /tmp/isucon4/qualifier/ami/files/supervisord.conf /etc/supervisord.conf
+    - apt: name=supervisor
+    - service: name=supervisor enabled=true
+    - shell: cp /tmp/isucon4/qualifier/ami/files/supervisord.conf /etc/supervisor/supervisord.conf
+      notify:
+        - restart supervisord
+    - ini_file: dest=/etc/supervisor/supervisord.conf section=unix_http_server option=chown value=root:sudo
       notify:
         - restart supervisord
   handlers:
     - name: restart supervisord
-      action: service name=supervisord state=restarted
+      action: service name=supervisor state=restarted

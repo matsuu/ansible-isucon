@@ -2,25 +2,30 @@
 - hosts: all
   sudo: yes
   tasks:
-    - apt: name=build-essential
-    - apt: name=python-meld3
-    - apt: name=ruby
-    - apt: name=git
-    - apt: name=libssl-dev
-    - apt: name=libcurl3
-    - apt: name=libcurl4-openssl-dev
-    - apt: name=bison
-    - apt: name=libbison-dev
-    - apt: name=libjpeg-turbo8
-    - apt: name=libjpeg-turbo8-dev
-    - apt: name=libpng12-0
-    - apt: name=libpng12-dev
-    - apt: name=libmcrypt4
-    - apt: name=libmcrypt-dev
-    - apt: name=readline-common
-    - apt: name=libreadline-dev
-    - apt: name=libtidy-0.99-0
-    - apt: name=libtidy-dev
-    - apt: name=libxml2-dev
-    - apt: name=libxslt1-dev
-    - apt: name=mysql-server
+    - apt: name={{item}}
+      with_items:
+        - autoconf
+        - automake
+        - build-essential
+        - python-meld3
+        - ruby
+        - git
+        - libssl-dev
+        - libcurl3
+        - libcurl4-openssl-dev
+        - bison
+        - libbison-dev
+        - libjpeg-turbo8
+        - libjpeg-turbo8-dev
+        - libpng12-0
+        - libpng12-dev
+        - libmcrypt4
+        - libmcrypt-dev
+        - readline-common
+        - libreadline-dev
+        - libtidy-0.99-0
+        - libtidy-dev
+        - libxml2-dev
+        - libxslt1-dev
+        - mysql-server
+        - libmysqlclient-dev

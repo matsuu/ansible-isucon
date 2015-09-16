@@ -6,8 +6,8 @@
     - apt: name=nginx-full
     - service: name=nginx enabled=true
     - apt: name=mysql-server
-    - service: name=mysqld state=running enabled=true
-    - apt: name=python-mysql.connector
+    - service: name=mysql state=running enabled=true
+    - apt: name=python-mysqldb
     - apt: name=git
     - git: repo=https://github.com/isucon/isucon4.git dest=/tmp/isucon4
     - shell: cp /tmp/isucon4/qualifier/ami/files/nginx.conf /etc/nginx/nginx.conf
@@ -44,6 +44,6 @@
     - mysql_user: name=isucon password=isucon priv=*.*:ALL state=present
   handlers:
     - name: restart mysqld
-      action: service name=mysqld state=restarted
+      action: service name=mysql state=restarted
     - name: reload nginx
       action: service name=nginx state=restarted
