@@ -6,6 +6,7 @@
       with_items:
         - autoconf
         - automake
+        - curl
         - build-essential
         - python-meld3
         - ruby
