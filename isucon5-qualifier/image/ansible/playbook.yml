@@ -1,0 +1,6 @@
+- include: 00_devel.yml
+- include: 01_isucon_base.yml
+- include: 02_xbuild.yml
+- include: 03_middleware.yml
+- include: 04_deploy_application.yml
+- include: _cleanup.yml

@@ -10,6 +10,7 @@ Ansible playbooks for [ISUCON](http://isucon.net/)
 - ISUCON3-final
 - [ISUCON4-qualifier](https://github.com/matsuu/ansible-isucon/tree/master/isucon4-qualifier)
 - ISUCON4-final
+- [ISUCON5-qualifier](https://github.com/matsuu/ansible-isucon/tree/master/isucon5-qualifier)
 
 ## License
 

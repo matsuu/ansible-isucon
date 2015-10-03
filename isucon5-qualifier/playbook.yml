@@ -1,0 +1,2 @@
+- include: bench/ansible/playbook.yml
+- include: image/ansible/playbook.yml

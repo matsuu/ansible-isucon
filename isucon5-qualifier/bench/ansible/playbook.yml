@@ -1,0 +1,5 @@
+
+- include: 00_devel.yml
+- include: 01_isucon_base.yml
+- include: 02_xbuild_part.yml
+- include: 06_deploy_bench_tool.yml

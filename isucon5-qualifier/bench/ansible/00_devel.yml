@@ -1,0 +1,39 @@
+---
+- hosts: benchservers
+  sudo: yes
+  gather_facts: no
+  tasks:
+    - apt: name=python-selinux state=present update_cache=true
+    - service: name=apparmor enabled=no state=stopped
+    - apt: name={{item}} state=present
+      with_items:
+        - git 
+        - gcc 
+        - patch 
+        - autoconf 
+        - automake 
+        - bison 
+        - build-essential
+        - libssl-dev 
+        - libyaml-dev 
+        - libreadline6-dev 
+        - zlib1g-dev 
+        - libncurses5-dev 
+        - libffi-dev 
+        - libgdbm3 
+        - libgdbm-dev 
+        - libmysqlclient-dev 
+        - libcurl4-openssl-dev 
+        - libjpeg-turbo8 
+        - libjpeg-turbo8-dev 
+        - libpng12-0 
+        - libpng12-dev 
+        - libmcrypt4 
+        - libmcrypt-dev 
+        - libtidy-0.99-0 
+        - libtidy-dev 
+        - libxml2-dev 
+        - libxslt1-dev 
+        - readline-common 
+        - re2c 
+        - language-pack-ja
