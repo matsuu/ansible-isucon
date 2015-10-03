@@ -1,5 +1,6 @@
 ---
 - hosts: benchservers
+  sudo: yes
   gather_facts: no
   tasks:
     - name: change timezone to JST

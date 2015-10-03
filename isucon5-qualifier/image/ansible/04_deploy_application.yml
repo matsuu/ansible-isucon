@@ -67,6 +67,7 @@
     # - command: sudo su - isucon /home/isucon/init.sh
 
 - hosts: imageservers
+  sudo: yes
   gather_facts: no
   tasks:
     - copy: src=../files/env.sh dest=/home/isucon/env.sh owner=isucon mode=644

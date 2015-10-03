@@ -14,6 +14,7 @@
         creates: /home/isucon/.local/ruby/bin/ruby
 
 - hosts: benchservers
+  sudo: yes
   gather_facts: no
   tasks:
     # java

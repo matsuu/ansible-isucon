@@ -17,6 +17,7 @@
         chdir: /home/isucon/isucon5-qualify/bench
 
 - hosts: benchservers
+  sudo: yes
   gather_facts: no
   tasks:
     - copy: src=../files/env.bench.sh dest=/home/isucon/env.bench.sh owner=isucon mode=644
