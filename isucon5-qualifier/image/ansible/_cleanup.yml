@@ -1,0 +1,5 @@
+---
+- hosts: imageservers
+  gather_facts: no
+  tasks:
+    - shell: rm -rf /tmp/*; true
