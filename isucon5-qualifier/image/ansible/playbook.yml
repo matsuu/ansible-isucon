@@ -3,4 +3,5 @@
 - include: 02_xbuild.yml
 - include: 03_middleware.yml
 - include: 04_deploy_application.yml
+- include: 07_deploy_database.yml
 - include: _cleanup.yml

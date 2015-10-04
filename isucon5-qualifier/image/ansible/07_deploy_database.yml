@@ -1,0 +1,25 @@
+---
+- hosts: imageservers
+  gather_facts: no
+  sudo: yes
+  sudo_user: isucon
+  tasks:
+    - git:
+        repo=https://github.com/isucon/isucon5-qualify.git
+        dest=/tmp/isucon5-qualify
+    - shell: |
+        mysqladmin -u root create isucon5q
+        cat /tmp/isucon5-qualify/webapp/sql/schema.sql | mysql -u root isucon5q
+    - shell: |
+        export PATH=/home/isucon/.local/ruby/bin:$PATH bundle install
+        ./gen.rb gen_users
+        ./gen.rb gen_relations
+        ./gen.rb gen_entries
+        ./gen.rb gen_comments
+        ./gen.rb gen_footprints
+        ./check_testsets.rb
+      args:
+        chdir: /tmp/isucon5-qualify/webapp/script
+    - command: rm -rf /tmp/isucon5-qualify
+      args:
+        removes: /tmp/isucon5-qualify
