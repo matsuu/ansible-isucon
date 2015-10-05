@@ -4,3 +4,4 @@ RACK_ENV=production
 _JAVA_OPTIONS="-Dfile.encoding=UTF8 -Duser.timezone=JST"
 JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
 JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export PATH LANG RACK_ENV _JAVA_OPTIONS JAVA_TOOL_OPTIONS JAVA_HOME
