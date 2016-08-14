@@ -17,7 +17,9 @@
       args:
         chdir: /home/isucon/webapp/ruby
     - name: perl
-      shell: PATH=/home/isucon/.local/perl/bin:$PATH carton install
+      shell: |
+        rm -f cpanfile.snapshot
+        PATH=/home/isucon/.local/perl/bin:$PATH carton install
       args:
         chdir: /home/isucon/webapp/perl
     - name: php
@@ -55,7 +57,6 @@
       args:
         chdir: /home/isucon/webapp/go
 
-    # TODO: - carton install (perl)
     # TODO: - npm install
     # TODO: - composer?
     - name: scala
