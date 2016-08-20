@@ -21,6 +21,13 @@
         ./check_testsets.rb
       args:
         chdir: /tmp/isucon5-qualify/webapp/script
+    - name: copy my.cnf
+      copy: src=../files/my.cnf dest=/etc/my.cnf owner=root mode=644
+      notify:
+        - restart mysqld
     - command: rm -rf /tmp/isucon5-qualify
       args:
         removes: /tmp/isucon5-qualify
+  handlers:
+    - name: restart mysqld
+      action: service name=mysql state=restarted

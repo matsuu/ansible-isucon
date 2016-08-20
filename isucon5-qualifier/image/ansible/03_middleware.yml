@@ -12,7 +12,7 @@
     - apt: name=mysql-server-5.6 state=present
     - file: path=/var/run/mysqld state=directory owner=mysql mode=775
     - name: copy my.cnf
-      copy: src=../files/my.cnf dest=/etc/my.cnf owner=root mode=644
+      copy: src=../files/my.cnf.restore dest=/etc/my.cnf owner=root mode=644
       notify:
         - restart mysqld
     - service: name=mysql state=running enabled=true
