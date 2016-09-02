@@ -10,6 +10,7 @@
     - shell: |
         mysqladmin -u root create isucon5q
         cat /tmp/isucon5-qualify/webapp/sql/schema.sql | mysql -u root isucon5q
+        for table in users salts relations profiles entries comments footprints ; do echo "ALTER TABLE ${table} ROW_FORMAT=compressed;" ; done | mysql -u root isucon5q
     - shell: |
         export PATH=/home/isucon/.local/ruby/bin:$PATH
         bundle install
