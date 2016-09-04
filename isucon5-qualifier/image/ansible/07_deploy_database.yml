@@ -11,7 +11,6 @@
         mysqladmin -u root create isucon5q
         cat /tmp/isucon5-qualify/webapp/sql/schema.sql | mysql -u root isucon5q
         for table in users salts relations profiles entries comments footprints ; do echo "ALTER TABLE ${table} ROW_FORMAT=compressed;" ; done | mysql -u root isucon5q
-    - shell: |
         export PATH=/home/isucon/.local/ruby/bin:$PATH
         bundle install
         ./gen.rb gen_users
@@ -20,15 +19,22 @@
         ./gen.rb gen_comments
         ./gen.rb gen_footprints
         ./check_testsets.rb
+        touch /tmp/done_mysql
       args:
         chdir: /tmp/isucon5-qualify/webapp/script
+        creates: /tmp/done_mysql
+    - command: rm -rf /tmp/isucon5-qualify
+      args:
+        removes: /tmp/isucon5-qualify
+
+- hosts: imageservers
+  gather_facts: no
+  sudo: yes
+  tasks:
     - name: copy my.cnf
       copy: src=../files/my.cnf dest=/etc/my.cnf owner=root mode=644
       notify:
         - restart mysqld
-    - command: rm -rf /tmp/isucon5-qualify
-      args:
-        removes: /tmp/isucon5-qualify
   handlers:
     - name: restart mysqld
       action: service name=mysql state=restarted
