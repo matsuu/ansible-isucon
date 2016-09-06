@@ -8,6 +8,7 @@
         repo=https://github.com/tagomoris/xbuild.git
         dest=/home/isucon/.xbuild
         update=yes
+        force=yes
     # https://twitter.com/matsuu/status/773105183744069633
     - replace: dest=/home/isucon/.xbuild/perl-install regexp='http://cpanmin\.us/' replace='http://git.io/cpanm'
     # ruby
