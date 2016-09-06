@@ -2,7 +2,7 @@
 - hosts: imageservers
   sudo: yes
   sudo_user: isucon
-  gather_facts: no
+  gather_facts: yes
   tasks:
     - git:
         repo=https://github.com/tagomoris/xbuild.git
@@ -17,15 +17,15 @@
       args:
         creates: /home/isucon/.local/node/bin/node
     # python3
-    - command: /home/isucon/.xbuild/python-install 3.4.3 /home/isucon/.local/python3
+    - shell: MAKE_OPTS="-j {{ansible_processor_vcpus}}" /home/isucon/.xbuild/python-install 3.4.3 /home/isucon/.local/python3
       args:
         creates: /home/isucon/.local/python3/bin/python
     # perl
-    - command: /home/isucon/.xbuild/perl-install 5.20.2 /home/isucon/.local/perl
+    - command: /home/isucon/.xbuild/perl-install 5.20.2 /home/isucon/.local/perl -j {{ansible_processor_vcpus}}
       args:
         creates: /home/isucon/.local/perl/bin/perl
     # php
-    - command: /home/isucon/.xbuild/php-install 5.6.13 /home/isucon/.local/php -- --with-pear --with-openssl
+    - shell: PHP_BUILD_EXTRA_MAKE_ARGUMENTS="-j {{ansible_processor_vcpus}}" /home/isucon/.xbuild/php-install 5.6.13 /home/isucon/.local/php -- --with-pear --with-openssl
       args:
         creates: /home/isucon/.local/php/bin/php
     - copy: src=../files/php.ini dest=/home/isucon/.local/php/etc/php.ini owner=isucon mode=644

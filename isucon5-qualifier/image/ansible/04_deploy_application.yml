@@ -27,7 +27,7 @@
       args:
         chdir: /home/isucon/webapp/php
     - name: java
-      shell: ./mvnw package
+      shell: ./mvnw -T 1C package
       args:
         chdir: /home/isucon/webapp/java
 
