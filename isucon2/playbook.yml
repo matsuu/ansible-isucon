@@ -143,7 +143,9 @@
     # supervisor package is too old
     # - yum: name=supervisor
     - yum: name=python-setuptools
-    - easy_install: name=supervisor
+    - command: easy_install supervisor
+      args:
+        creates: /usr/bin/supervisord
     - copy: src=files/etc/init.d/supervisord dest=/etc/init.d/ mode=a+x
     - copy: src=files/etc/sysconfig/supervisord dest=/etc/sysconfig/
     - copy: src=files/etc/supervisord.conf dest=/etc/
