@@ -51,9 +51,9 @@
 
     # nodejs
     - sudo_user: isucon
-      shell: .xbuild/node-install v0.8.28 /home/isucon/local/node-v0.8
+      shell: .xbuild/node-install v6.11.0 /home/isucon/local/node-v6.11
       args:
-        creates: /home/isucon/local/node-v0.8/bin/node
+        creates: /home/isucon/local/node-v6.11/bin/node
     - sudo_user: isucon
       shell: |
         set -e
