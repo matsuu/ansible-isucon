@@ -143,7 +143,16 @@
     # supervisor package is too old
     # - yum: name=supervisor
     - yum: name=python-setuptools
-    - easy_install: name=supervisor
+
+    # see: http://dev.classmethod.jp/server-side/ansible/use_command_module_when_failed_easy_install_using_ansible_on_centos6/
+    # - easy_install: name=supervisor
+    - name: check supervisor command
+      stat:
+        path: /usr/bin/supervisor
+      register: _supervisor_stat_result
+    - name: install supervisor
+      command: "easy_install supervisor"
+      when: _supervisor_stat_result.stat.exists == false
     - copy: src=files/etc/init.d/supervisord dest=/etc/init.d/ mode=a+x
     - copy: src=files/etc/sysconfig/supervisord dest=/etc/sysconfig/
     - copy: src=files/etc/supervisord.conf dest=/etc/
