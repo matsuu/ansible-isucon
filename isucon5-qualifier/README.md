@@ -25,9 +25,9 @@ yum install -y ansible
 git clone https://github.com/matsuu/ansible-isucon.git
 cd ansible-isucon/isucon5-qualifier
 # for image
-ansible-playbook -i local image/ansbile/playbook.yml
+ansible-playbook -i local image/ansible/playbook.yml
 # for bench
-ansible-playbook -i local bench/ansbile/playbook.yml
+ansible-playbook -i local bench/ansible/playbook.yml
 ```
 
 ## 本来の設定と異なるところ
