@@ -30,6 +30,7 @@ ansible-playbook -i local playbook.yml
 ## 本来の設定と異なるところ
 
 - MySQLのバージョンを5.5.42からMySQL GA最新版(現在は5.6系)に変更しています
+- nginxのバージョンを1.6.1からstable最新版に変更しています
 - ログインユーザをec2-userからvagrantに変更しています
 - ベンチマークプログラムのインスタンスチェックを削除しています
 
