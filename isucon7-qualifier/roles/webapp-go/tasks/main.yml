@@ -1,0 +1,26 @@
+---
+
+- apt:
+    state: present
+    name: "{{item}}"
+  with_items:
+    - curl
+
+- shell: "/home/isucon/xbuild/go-install -f 1.9 /home/isucon/local/go"
+  args:
+    creates: /home/isucon/local/go/bin/go
+  become_user: isucon
+
+- shell: PATH="/home/isucon/local/go/bin:$PATH" make
+  args:
+    chdir: /home/isucon/isubata/webapp/go
+  become_user: isucon
+
+- copy:
+    src: /home/isucon/isubata/files/app/isubata.golang.service
+    dest: /etc/systemd/system/
+    remote_src: yes
+  notify: daemon-reload
+
+- set_fact:
+    app_service: golang

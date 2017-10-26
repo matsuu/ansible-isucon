@@ -1,0 +1,59 @@
+---
+
+- apt:
+    state: present
+    name: "{{item}}"
+  with_items:
+    - autoconf
+    - bison
+    - curl
+    - gcc
+    - libbz2-dev
+    - libcurl4-openssl-dev
+    - libgd-dev
+    - libmcrypt-dev
+    - libmhash-dev
+    - libreadline-dev
+    - libssl-dev
+    - libtidy-dev
+    - libxml2-dev
+    - libxslt1-dev
+    - make
+    - re2c
+
+- shell: "/home/isucon/xbuild/php-install -f 7.1.9 /home/isucon/local/php -- --with-pcre-regex --with-zlib --enable-fpm --enable-pdo --with-openssl --with-pcre-regex --with-pcre-dir --with-libxml-dir --enable-opcache --enable-bcmath --with-bz2 --enable-calendar --enable-cli --enable-shmop --enable-sysvsem --enable-sysvshm --enable-sysvmsg --enable-mbregex --enable-mbstring --with-mcrypt --enable-pcntl --enable-sockets --with-curl --enable-zip --with-pear"
+  args:
+    creates: /home/isucon/local/php/bin/php
+  become_user: isucon
+
+- get_url:
+    url: https://getcomposer.org/composer.phar
+    dest: /home/isucon/local/php/bin/composer
+    mode: 0755
+  become_user: isucon
+
+- shell: PATH="/home/isucon/local/php/bin:$PATH" composer install
+  args:
+    chdir: /home/isucon/isubata/webapp/php
+  become_user: isucon
+
+- copy:
+    src: /home/isucon/isubata/files/app/php.ini
+    dest: /home/isucon/local/php/etc/
+    remote_src: yes
+  become_user: isucon
+
+- copy:
+    src: /home/isucon/isubata/files/app/isubata.php-fpm.conf
+    dest: /home/isucon/local/php/etc/
+    remote_src: yes
+  become_user: isucon
+
+- copy:
+    src: /home/isucon/isubata/files/app/isubata.php.service
+    dest: /etc/systemd/system/
+    remote_src: yes
+  notify: daemon-reload
+
+- set_fact:
+    app_service: php

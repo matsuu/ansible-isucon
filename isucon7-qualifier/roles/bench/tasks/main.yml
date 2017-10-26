@@ -1,0 +1,22 @@
+---
+
+- apt:
+    state: present
+    name: "{{item}}"
+  with_items:
+    - make
+
+- shell: "/home/isucon/xbuild/go-install -f 1.9 /home/isucon/local/go"
+  args:
+    creates: /home/isucon/local/go
+  become_user: isucon
+
+- shell: |
+    export PATH="$HOME/local/go/bin:$HOME/go/bin:$PATH"
+    go get github.com/constabulary/gb/...
+    cd /home/isucon/isubata/bench
+    gb vendor restore
+    make
+  args:
+    creates: /home/isucon/isubata/bench/bin/bench
+  become_user: isucon
