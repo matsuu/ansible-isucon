@@ -1,0 +1,3 @@
+---
+- import_playbook: bench.yml
+- import_playbook: image.yml

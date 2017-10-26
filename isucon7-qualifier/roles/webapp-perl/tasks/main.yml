@@ -1,0 +1,29 @@
+---
+
+- apt:
+    state: present
+    name: "{{item}}"
+  with_items:
+    - curl
+    - gcc
+    - libmysqlclient-dev
+    - make
+
+- shell: "/home/isucon/xbuild/perl-install -f 5.26.1 /home/isucon/local/perl"
+  args:
+    creates: /home/isucon/local/perl/bin/perl
+  become_user: isucon
+
+- shell: PATH="/home/isucon/local/perl/bin:$PATH" carton install
+  args:
+    chdir: /home/isucon/isubata/webapp/perl
+  become_user: isucon
+
+- copy:
+    src: /home/isucon/isubata/files/app/isubata.perl.service
+    dest: /etc/systemd/system/
+    remote_src: yes
+  notify: daemon-reload
+
+- set_fact:
+    app_service: perl

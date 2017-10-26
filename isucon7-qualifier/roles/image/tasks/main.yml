@@ -1,0 +1,18 @@
+---
+
+- copy:
+    src: /home/isucon/isubata/files/app/env.sh
+    dest: /home/isucon/
+    remote_src: yes
+  become_user: isucon
+
+- lineinfile:
+    dest: /home/isucon/env.sh
+    regexp: '^ISUBATA_DB_HOST='
+    line: 'ISUBATA_DB_HOST=localhost'
+  become_user: isucon
+
+- service:
+    name: "isubata.{{ app_service }}"
+    enabled: yes
+    state: started

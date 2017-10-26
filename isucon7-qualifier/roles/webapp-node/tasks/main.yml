@@ -1,0 +1,26 @@
+---
+
+- apt:
+    state: present
+    name: "{{item}}"
+  with_items:
+    - curl
+
+- shell: "/home/isucon/xbuild/node-install -f v6.11.4 /home/isucon/local/node"
+  args:
+    creates: /home/isucon/local/node/bin/node
+  become_user: isucon
+
+- shell: PATH="/home/isucon/local/node/bin:$PATH" npm install
+  args:
+    chdir: /home/isucon/isubata/webapp/nodejs
+  become_user: isucon
+
+- copy:
+    src: /home/isucon/isubata/files/app/isubata.nodejs.service
+    dest: /etc/systemd/system/
+    remote_src: yes
+  notify: daemon-reload
+
+- set_fact:
+    app_service: nodejs

@@ -1,0 +1,29 @@
+---
+
+- apt:
+    state: present
+    name: "{{item}}"
+  with_items:
+    - git
+    - sudo
+
+- user:
+    name: isucon
+
+- copy:
+    src: 90-isucon-user
+    dest: /etc/sudoers.d/90-isucon-user
+    owner: root
+    group: root
+    mode: 0640
+
+- git:
+    repo: 'https://github.com/isucon/isucon7-qualify.git'
+    dest: /home/isucon/isubata
+    update: no
+  become_user: isucon
+
+- git:
+    repo: 'https://github.com/tagomoris/xbuild.git'
+    dest: /home/isucon/xbuild
+  become_user: isucon

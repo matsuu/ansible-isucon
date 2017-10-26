@@ -1,0 +1,53 @@
+---
+
+- apt:
+    state: present
+    name: "{{item}}"
+  with_items:
+    - make
+    - mysql-server
+    - python-mysqldb
+
+- shell: "/home/isucon/xbuild/go-install -f 1.9 /home/isucon/local/go"
+  args:
+    creates: /home/isucon/local/go
+  become_user: isucon
+
+- shell: |
+    export PATH="$HOME/local/go/bin:$HOME/go/bin:$PATH"
+    go get github.com/constabulary/gb/...
+    cd /home/isucon/isubata/bench
+    gb vendor restore
+    make
+    ./bin/gen-initial-dataset
+  args:
+    creates: /home/isucon/isubata/bench/isucon7q-initial-dataset.sql.gz
+  become_user: isucon
+
+- shell: "/home/isucon/isubata/db/init.sh"
+
+- mysql_user:
+    name: isucon
+    password: isucon
+    host: "%"
+    priv: "*.*:ALL"
+    state: present
+
+- mysql_user:
+    name: isucon
+    password: isucon
+    priv: "*.*:ALL"
+    state: present
+
+- shell: "zcat /home/isucon/isubata/bench/isucon7q-initial-dataset.sql.gz | mysql --default-character-set=utf8 --max_allowed_packet=512M isubata"
+
+- copy:
+    src: /home/isucon/isubata/files/db/mysqld.cnf
+    dest: /etc/mysql/mysql.conf.d/
+    remote_src: yes
+  notify: restart mysql
+
+- service:
+    name: mysql
+    enabled: yes
+    state: started

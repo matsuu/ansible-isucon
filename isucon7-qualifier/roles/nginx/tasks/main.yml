@@ -1,0 +1,35 @@
+---
+
+- apt:
+    state: present
+    name: "{{item}}"
+  with_items:
+    - nginx
+
+- copy:
+    src: /home/isucon/isubata/files/app/nginx.conf
+    dest: /etc/nginx/sites-available
+    remote_src: yes
+  notify: reload nginx
+
+- copy:
+    src: /home/isucon/isubata/files/app/nginx.php.conf
+    dest: /etc/nginx/sites-available
+    remote_src: yes
+  notify: reload nginx
+
+- file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+  notify: reload nginx
+
+- file:
+    src: ../sites-available/nginx.conf
+    path: /etc/nginx/sites-enabled/nginx.conf
+    state: link
+  notify: reload nginx
+
+- service:
+    name: nginx
+    enabled: yes
+    state: started
