@@ -41,6 +41,10 @@
 
 - shell: "zcat /home/isucon/isubata/bench/isucon7q-initial-dataset.sql.gz | mysql --default-character-set=utf8 --max_allowed_packet=512M isubata"
 
+- file:
+    path: /home/isucon/isubata/bench/isucon7q-initial-dataset.sql.gz
+    state: absent
+
 - copy:
     src: /home/isucon/isubata/files/db/mysqld.cnf
     dest: /etc/mysql/mysql.conf.d/
