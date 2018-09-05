@@ -9,7 +9,7 @@
       notify:
         - reload nginx
     - copy: src=../files/nginx.php.conf dest=/etc/nginx/nginx.php.conf owner=root mode=644
-    - apt: name=mysql-server-5.6 state=present
+    - apt: name=mysql-server state=present
     - file: path=/var/run/mysqld state=directory owner=mysql mode=775
     - name: copy my.cnf
       copy: src=../files/my.cnf.restore dest=/etc/my.cnf owner=root mode=644
