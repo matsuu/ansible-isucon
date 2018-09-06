@@ -33,6 +33,7 @@ ansible-playbook -i local bench/ansible/playbook.yml
 ## 本来の設定と異なるところ
 
 - ベンチマークはCLIから手動で実行する必要があります
+- goのバージョンを依存関係解決のため1.5から1.8に変更しています
 
 ## References
 
