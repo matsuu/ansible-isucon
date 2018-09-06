@@ -32,6 +32,7 @@
         chdir: /home/isucon/webapp/java
 
     # python
+    - command: /home/isucon/.local/python3/bin/pip install --upgrade setuptools
     - command: /home/isucon/.local/python3/bin/pip install bottle
     - command: /home/isucon/.local/python3/bin/pip install pymysql
     - command: /home/isucon/.local/python3/bin/pip install gunicorn
