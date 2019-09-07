@@ -6,9 +6,9 @@
     - mysql
     - nginx
     - webapp-go
-    - webapp-node
+#    - webapp-node
     - webapp-perl
-    - webapp-php
-    - webapp-ruby
-    - webapp-python
+#    - webapp-php
+#    - webapp-ruby
+#    - webapp-python
     - image
