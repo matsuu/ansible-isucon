@@ -16,6 +16,10 @@ Ansible playbooks for [ISUCON](http://isucon.net/)
 - ISUCON6-final
 - [ISUCON7-qualifier](https://github.com/matsuu/ansible-isucon/tree/master/isucon7-qualifier)
 - ISUCON7-final
+- [ISUCON8-qualifier](https://github.com/isucon/isucon8-qualify/tree/master/provisioning)
+- ISUCON9-final
+- [ISUCON9-qualifier](https://github.com/matsuu/ansible-isucon9-qualify)
+- ISUCON9-final
 
 ## License
 
