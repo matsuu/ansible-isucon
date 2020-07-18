@@ -47,7 +47,7 @@
     # xbuild
     - yum: name=gcc
     - sudo_user: isucon
-      git: repo=https://github.com/tagomoris/xbuild.git dest=/home/isucon/.xbuild
+      git: repo=https://github.com/tagomoris/xbuild.git dest=/home/isucon/.xbuild force=yes
 
     # nodejs
     - sudo_user: isucon
@@ -85,6 +85,11 @@
     - yum: name=openssl-devel
     - yum: name=readline-devel
     - yum: name=zlib-devel
+    # for ruby-1.9
+    - sudo_user: isucon
+      replace: dest=/home/isucon/.xbuild/ruby-install regexp="--no-document" replace="--no-ri --no-rdoc"
+    - sudo_user: isucon
+      replace: dest=/home/isucon/.xbuild/ruby-install regexp='gems="bundler .*' replace='"$LOCATION"/bin/gem install --no-ri --no-rdoc bundler -v 1.9.3'
     - sudo_user: isucon
       shell: /home/isucon/.xbuild/ruby-install 1.9.3-p551 /home/isucon/local/ruby-1.9
       args:
