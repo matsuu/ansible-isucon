@@ -51,9 +51,10 @@
 
     # nodejs
     - sudo_user: isucon
-      shell: .xbuild/node-install v6.11.0 /home/isucon/local/node-v6.11
+      shell: /home/isucon/.xbuild/node-install v6.11.0 /home/isucon/local/node-v6.11
       args:
         creates: /home/isucon/local/node-v6.11/bin/node
+        chdir: /home/isucon
     - sudo_user: isucon
       shell: |
         set -e
@@ -62,12 +63,14 @@
         npm install
       args:
         creates: /home/isucon/webapp/nodejs/node_modules
+        chdir: /home/isucon
 
     # perl
     - sudo_user: isucon
-      shell: .xbuild/perl-install 5.16.1 /home/isucon/local/perl-5.16
+      shell: /home/isucon/.xbuild/perl-install 5.16.1 /home/isucon/local/perl-5.16
       args:
         creates: /home/isucon/local/perl-5.16/bin/perl
+        chdir: /home/isucon
     - sudo_user: isucon
       shell: |
         set -e
@@ -75,15 +78,18 @@
         cd webapp/perl/
         curl -L https://cpanmin.us | perl - Carton
         carton install
+      args:
+        chdir: /home/isucon
 
     # ruby
     - yum: name=openssl-devel
     - yum: name=readline-devel
     - yum: name=zlib-devel
     - sudo_user: isucon
-      shell: .xbuild/ruby-install 1.9.3-p551 /home/isucon/local/ruby-1.9
+      shell: /home/isucon/.xbuild/ruby-install 1.9.3-p551 /home/isucon/local/ruby-1.9
       args:
         creates: /home/isucon/local/ruby-1.9/bin/ruby
+        chdir: /home/isucon
     - sudo_user: isucon
       lineinfile: dest=/home/isucon/webapp/ruby/Gemfile regexp="foreman" insertafter="unicorn" line="gem 'foreman'"
     - sudo_user: isucon
@@ -91,22 +97,27 @@
         set -e
         source ./env.sh
         cd webapp/ruby/
-        gem install bundler
+        gem install bundler -v 1.9.3
         bundle install --no-deployment --without development
         bundle install --deployment --without development
+      args:
+        chdir: /home/isucon
 
     # python
     - yum: name=patch
     - sudo_user: isucon
-      shell: .xbuild/python-install 2.7.3 /home/isucon/local/python-2.7
+      shell: /home/isucon/.xbuild/python-install 2.7.3 /home/isucon/local/python-2.7
       args:
         creates: /home/isucon/local/python-2.7/bin/python
+        chdir: /home/isucon
     - sudo_user: isucon
       shell: |
         set -e
         source ./env.sh
         cd webapp/python/
-        easy_install flask MySQL-python gunicorn
+        pip install flask MySQL-python gunicorn
+      args:
+        chdir: /home/isucon
 
     ## java
     #- yum: name=java-1.6.0-openjdk
@@ -130,7 +141,7 @@
     - sudo_user: isucon
       shell: |
         set -e
-        source ./env.sh
+        source /home/isucon/env.sh
         (
           cd tools/http_load_isucon2
           make
@@ -139,13 +150,20 @@
           cd tools
           npm install
         )
+      args:
+       chdir: /home/isucon
   
     # supervisor package is too old
-    # - yum: name=supervisor
     - yum: name=python-setuptools
-    - command: easy_install supervisor
+    - sudo_user: isucon
+      shell: |
+        set -e
+        source ./env.sh
+        pip install supervisor
+        sudo cp /home/isucon/local/python-2.7/bin/supervisord /usr/bin/supervisord
       args:
         creates: /usr/bin/supervisord
+        chdir: /home/isucon
     - copy: src=files/etc/init.d/supervisord dest=/etc/init.d/ mode=a+x
     - copy: src=files/etc/sysconfig/supervisord dest=/etc/sysconfig/
     - copy: src=files/etc/supervisord.conf dest=/etc/
