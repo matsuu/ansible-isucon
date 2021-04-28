@@ -60,7 +60,7 @@
 
     - name: fix sbt uri
       replace:
-        path: /home/isucon/webapp/scala/sbt
+        dest: /home/isucon/webapp/scala/sbt
         regexp: 'http://repo\.typesafe\.com/'
         replace: 'https://repo.typesafe.com/'
 
