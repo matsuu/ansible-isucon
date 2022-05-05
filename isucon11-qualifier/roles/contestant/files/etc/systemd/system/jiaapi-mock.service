@@ -1,0 +1,16 @@
+[Unit]
+Description=jiaapi-mock
+After=network.target
+
+[Service]
+PIDFile=/run/jiaapi-mock.pid
+
+User=isucon
+Group=isucon
+ExecStart=/usr/local/bin/jiaapi-mock
+
+Restart   = always
+Type      = simple
+
+[Install]
+WantedBy=multi-user.target
