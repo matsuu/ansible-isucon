@@ -14,7 +14,7 @@
 - name: "roles/bench/tasks/bench: Deploy initial-data for bench"
   become_user: isucon
   get_url:
-    src: "https://github.com/isucon/isucon11-qualify/releases/download/public/initialize.json"
+    url: "https://github.com/isucon/isucon11-qualify/releases/download/public/initialize.json"
     dest: /home/isucon/bench/data/initialize.json
     owner: isucon
     group: isucon
