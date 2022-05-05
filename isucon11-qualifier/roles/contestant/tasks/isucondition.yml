@@ -57,7 +57,7 @@
 
 - name: "roles/contestant/tasks/isucondition: Deploy isucon11 initial-data"
   get_url:
-    src: "https://github.com/isucon/isucon11-qualify/releases/download/public/1_InitData.sql"
+    url: "https://github.com/isucon/isucon11-qualify/releases/download/public/1_InitData.sql"
     dest: "/home/isucon/webapp/sql/1_InitData.sql"
     owner: isucon
     group: isucon
