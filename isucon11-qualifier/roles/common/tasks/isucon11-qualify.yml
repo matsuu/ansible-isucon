@@ -1,5 +1,6 @@
 ---
-- name: "roles/common/tasks/isucon11-qualify: Create directory"
-  file:
-    path: /tmp/isucon11-qualify
-    state: directory
+- name: "roles/common/tasks/isucon11-qualify: clone git repository"
+  ansible.builtin.git:
+    repo: https://github.com/isucon/isucon-qualify.git
+    dest: /tmp/isucon11-qualify
+    update: no
