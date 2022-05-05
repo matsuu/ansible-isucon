@@ -13,9 +13,9 @@
 
 - name: "roles/bench/tasks/bench: Deploy initial-data for bench"
   become_user: isucon
-  copy:
-    src: "initialize.json"
-    dest: /home/isucon/bench/data/
+  get_url:
+    src: "https://github.com/isucon/isucon11-qualify/releases/download/public/initialize.json"
+    dest: /home/isucon/bench/data/initialize.json
     owner: isucon
     group: isucon
 
@@ -28,7 +28,7 @@
 - name: "roles/bench/tasks/bench: Deploy images"
   become_user: isucon
   unarchive:
-    src: images.tgz
+    src: "https://github.com/isucon/isucon11-qualify/releases/download/public/images.tgz"
     dest: /home/isucon/bench/
     owner: isucon
     group: isucon
