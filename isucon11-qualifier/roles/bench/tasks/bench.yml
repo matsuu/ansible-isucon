@@ -30,6 +30,7 @@
   unarchive:
     src: "https://github.com/isucon/isucon11-qualify/releases/download/public/images.tgz"
     dest: /home/isucon/bench/
+    remote_src: yes
     owner: isucon
     group: isucon
 
