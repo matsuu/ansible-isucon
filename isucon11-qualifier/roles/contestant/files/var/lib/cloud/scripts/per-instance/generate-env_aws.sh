@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-index="$(curl -s --retry 5 --retry-connrefused --max-time 10 --connect-timeout 5 http://169.254.169.254/1.0/meta-data/local-ipv4 | rev | cut -c 1)"
+index=1
 
 cat << _EOF_ >> /home/isucon/env.sh
 MYSQL_HOST="127.0.0.1"

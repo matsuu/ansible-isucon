@@ -1,4 +1,12 @@
 ---
+- name: "roles/contestant/tasks/generate_env: Create directory for generate-env.sh"
+  tags:
+    - aws
+  become_user: root
+  file:
+    path: "/var/lib/cloud/scripts/per-instance"
+    state: directory
+
 - name: "roles/contestant/tasks/generate_env: Deploy generate-env.sh"
   tags:
     - aws

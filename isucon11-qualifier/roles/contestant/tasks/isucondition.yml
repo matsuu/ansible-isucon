@@ -68,3 +68,7 @@
   shell: |
     mysql -uisucon -pisucon -e 'CREATE DATABASE isucondition'
     bash /home/isucon/webapp/sql/init.sh
+
+- name: "roles/contestant/tasks/isucondition: Run generate-env.sh"
+  become_user: root
+  shell: /var/lib/cloud/scripts/per-instance/generate-env.sh
