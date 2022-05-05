@@ -1,6 +1,6 @@
 ---
 - name: "roles/common/tasks/isucon11-qualify: clone git repository"
   ansible.builtin.git:
-    repo: https://github.com/isucon/isucon-qualify.git
+    repo: https://github.com/isucon/isucon11-qualify.git
     dest: /tmp/isucon11-qualify
     update: no
