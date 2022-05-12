@@ -1,0 +1,19 @@
+[Unit]
+Description=isucondition.ruby
+After=network.target mysql.service cloud-config.service
+
+[Service]
+WorkingDirectory=/home/isucon/webapp/ruby
+EnvironmentFile=/home/isucon/env.sh
+Environment=RACK_ENV=production
+
+User=isucon
+Group=isucon
+ExecStart=/home/isucon/local/ruby/bin/bundle exec puma -p 3000
+ExecStop=/bin/kill -s QUIT $MAINPID
+
+Restart   = always
+Type      = simple
+
+[Install]
+WantedBy=multi-user.target

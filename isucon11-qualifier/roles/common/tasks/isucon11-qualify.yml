@@ -1,0 +1,7 @@
+---
+- name: "roles/common/tasks/isucon11-qualify: clone git repository"
+  become_user: isucon
+  ansible.builtin.git:
+    repo: https://github.com/isucon/isucon11-qualify.git
+    dest: /tmp/isucon11-qualify
+    update: no

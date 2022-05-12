@@ -1,0 +1,5 @@
+---
+- name: "roles/common/tasks/timezone: Set timezone to Asia/Tokyo"
+  become_user: root
+  timezone:
+    name: Asia/Tokyo
