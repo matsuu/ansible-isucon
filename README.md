@@ -24,6 +24,8 @@ Ansible playbooks for [ISUCON](http://isucon.net/)
 * [ISUCON10-final](https://github.com/isucon/isucon10-final/tree/master/packer/files/itamae) (itamae)
 * [ISUCON11-qualifier](https://github.com/matsuu/ansible-isucon/tree/master/isucon11-qualifier)
 * [ISUCON11-final](https://github.com/isucon/isucon11-final/tree/main/provisioning/ansible)
+* [ISUCON12-qualifier](https://github.com/isucon/isucon12-qualify/tree/main/provisioning/mitamae) (mitamae)
+* [ISUCON12-final](https://github.com/isucon/isucon12-final/tree/main/provisioning/packer/ansible)
 
 ## Related
 
